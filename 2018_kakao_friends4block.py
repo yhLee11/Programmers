@@ -17,6 +17,7 @@ def solution(m=4, n=5, board=["CCBDE", "AAADE", "AAABF", "CCBBF"]):
             empty=['_']*row.count(0)
             b[i]=empty+[block for block in row if block!=0]
 
+        print(b)
         cnt+=len(pop_set)
     return cnt
 print(solution())
