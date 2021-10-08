@@ -1,3 +1,4 @@
+#SOL1
 from collections import deque
 def solution(numbers, target):
     answer = 0
@@ -14,3 +15,19 @@ def solution(numbers, target):
         dq.append((sum-numbers[level-1],level+1))
 
     return answer
+#SOL2
+ans=0
+def solution(numbers, target):
+    global ans
+    def dfs(idx,val):
+        global ans
+        if len(numbers)==idx and target==val:
+            ans+=1
+            return
+        if len(numbers)==idx:
+            return
+        dfs(idx+1,val+numbers[idx])
+        dfs(idx+1,val-numbers[idx])
+    dfs(0,0)
+    print(ans)
+    return ans
