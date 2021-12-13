@@ -1,4 +1,3 @@
-from collections import defaultdict
 def solution(gems):
     start,end=0,0
     kinds=list(set(gems))
