@@ -1,26 +1,28 @@
+from collections import defaultdict
 def solution(gems):
+    dic=defaultdict(int)
+    jew=len(set(gems))
+    if jew==len(gems):
+        return list(1,len(gems))
+    ans=[]
     start,end=0,0
-    kinds=list(set(gems))
-    num=[0]*len(kinds)
-    cnt=0
-    res=[]
-    for i in range(len(gems)):
-        num=[0]*len(kinds)
-        zero=True
-        start=i+1
-        for j in range(i,len(gems)):
-            idx=kinds.index(gems[j])
-            num[idx]+=1
-            for z in range(len(num)):
-                if num[z]==0:
-                    break
-                if z==len(num)-1 and num[z]!=0:
-                    zero=False
-                    end=j+1
-                    break
-            if z==len(num)-1 and num[z]!=0:
-                break
-        if not zero:
-            res.append((start,end))
-    res.sort(key=lambda x:(x[1]-x[0],x[0]))
-    return list(res[0])
+    while True:
+        if start==len(gems):
+            break
+        if end==len(gems):
+            dic[gems[end-1]]+=1
+            if len(dic)==jew:
+                ans.append((end-start,start,end))
+            dic=defaultdict(int)
+            start+=1
+            end=start
+        for i in range(start,end):
+            dic[gems[i]]+=1
+        if len(dic)==jew:
+            ans.append((end-start,start,end))
+            dic=defaultdict(int)
+            start+=1
+            end=start
+        end+=1
+    ans.sort(key=lambda x:(x[0],x[1]))
+    return [ans[0][1]+1,ans[0][2]]
