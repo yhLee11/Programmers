@@ -6,9 +6,8 @@ def solution(gems):
     ans=[]
     start,end=0,0
 
-    while True:
+    while start<=gems_len and end<=gems_len:
         if end==gems_len:
-            if start==gems_len:break
             if len(dic)==jew:
                 ans.append([end-start,start,end])
                 dic[gems[start]]-=1
@@ -26,5 +25,6 @@ def solution(gems):
             else:
                 dic[gems[end]]+=1
                 end+=1
+
     ans.sort(key=lambda x:(x[0],x[1]))
     return [ans[0][1]+1,ans[0][2]]
