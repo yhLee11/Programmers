@@ -1,26 +1,24 @@
-def solution(gems):
-    start,end=0,0
-    kinds=list(set(gems))
-    num=[0]*len(kinds)
-    cnt=0
-    res=[]
-    for i in range(len(gems)):
-        num=[0]*len(kinds)
-        zero=True
-        start=i+1
-        for j in range(i,len(gems)):
-            idx=kinds.index(gems[j])
-            num[idx]+=1
-            for z in range(len(num)):
-                if num[z]==0:
-                    break
-                if z==len(num)-1 and num[z]!=0:
-                    zero=False
-                    end=j+1
-                    break
-            if z==len(num)-1 and num[z]!=0:
-                break
-        if not zero:
-            res.append((start,end))
-    res.sort(key=lambda x:(x[1]-x[0],x[0]))
-    return list(res[0])
+from collections import defaultdict
+gems=["DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"]
+dic=defaultdict(int)
+jew=len(set(gems))
+ans=[]
+start,end=0,0
+while True:
+    print(start,end,dic)
+    if start==len(gems):
+        break
+    # if end==len(gems):
+        
+    if len(dic)==jew:
+        ans.append((end-start,[start,end]))
+        print('append ans',ans)
+        dic=defaultdict(int)
+        start+=1
+        end=start
+    for i in range(start,end):
+        dic[gems[i]]+=1
+
+    end+=1
+
+print(ans)
