@@ -1,0 +1,20 @@
+from collections import defaultdict as dd
+def solution(tks):
+    dest=dd(list)
+    for s,e in tks:
+        dest[s].append(e)
+            
+    for k in dest.keys():
+        dest[k].sort(reverse=True)
+    
+    stk=["ICN"]
+    path=[]
+    while stk:
+        top=stk.pop()
+        if top not in dest or not dest[top]:
+            path.append(top)
+        else: 
+            stk.append(top)
+            stk.append(dest[top].pop())
+    return path[::-1]
+        
